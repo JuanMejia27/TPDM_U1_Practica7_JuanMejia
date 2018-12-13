@@ -23,73 +23,58 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity {
-
     EditText edad,archivo;
     CheckBox mexico,america,europa,asia;
     RadioButton casado,soltero;
-    Switch selec;
     Button aceptar;
+    Switch selec;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        selec=(Switch)findViewById(R.id.selec);
+        selec = findViewById(R.id.selec);
 
-        edad=(EditText)findViewById(R.id.edad);
+        edad = findViewById(R.id.edad);
 
-        mexico=(CheckBox)findViewById(R.id.mexico);
-        america=(CheckBox)findViewById(R.id.america);
-        europa=(CheckBox)findViewById(R.id.europa);
-        asia=(CheckBox)findViewById(R.id.asia);
+        mexico = findViewById(R.id.mexico);
+        america = findViewById(R.id.america);
+        europa = findViewById(R.id.europa);
+        asia = findViewById(R.id.asia);
 
-        casado=(RadioButton)findViewById(R.id.casado);
-        soltero=(RadioButton)findViewById(R.id.soltero);
-
-        aceptar=(Button)findViewById(R.id.aceptar);
+        casado = findViewById(R.id.casado);
+        soltero = findViewById(R.id.soltero);
+        aceptar = findViewById(R.id.aceptar);
 
         permisos();
 
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String ciudad="";
+                String data="";
                 String activo="";
+                String mx="",am="",eu="",as="",age="";
+                age = edad.getText().toString();
+                if (mexico.isChecked()) mx = "Mexico";
+                if (america.isChecked()) am = "America";
+                if (europa.isChecked()) eu = "Europa";
+                if (asia.isChecked()) as = "Asia";
 
-                if(mexico.isChecked()){
-                    ciudad += "Mexico\n";
-                }
+                data = mx+"\n"+am+"\n"+eu+"\n"+as+"\n";
 
-                if(america.isChecked()){
-                    ciudad += "America\n";
-                }
+                if(casado.isChecked()) data += "Estado Civil:\n Casado\n";
 
-                if(europa.isChecked()){
-                    ciudad += "Europa\n";
-                }
+                if(soltero.isChecked())data += "Estado Civil:\n Soltero\n";
 
-                if(asia.isChecked()){
-                    ciudad += "Asia\n";
-                }
 
-                if(casado.isChecked()){
-                    ciudad += "Casado\n";
-                }
-
-                if(soltero.isChecked()){
-                    ciudad += "Soltero\n";
-                }
-
-                String cad="";
-                cad = "Edad: "+edad.getText().toString();
-                cad +="\nLugares visitados: \n"+ciudad;
-                cad +="\nEstado Civil: \n"+activo;
 
                 if(selec.isChecked()){
                     archivo = new EditText(MainActivity.this);
                     AlertDialog.Builder alerta=new AlertDialog.Builder(MainActivity.this);
-                    final String finalCad = cad;
+                    final String finalCad = "Edad: "+age+
+                            "\nLugares visitados: \n"+data;
+
                     alerta.setTitle("Guardar Archivo").setView(archivo)
                             .setPositiveButton("guardar", new DialogInterface.OnClickListener() {
                                 @Override

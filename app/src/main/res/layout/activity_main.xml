@@ -55,9 +55,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="25dp"
-        android:text="Lugares más visitados:"
-        android:layout_marginTop="8dp"/>
+        android:textSize="20dp"
+        android:text="Lugares más visitados:"/>
 
     <CheckBox
         android:layout_width="wrap_content"
